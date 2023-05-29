@@ -57,26 +57,11 @@ def get_context_from_db_entry(db_entry: QuerySet) -> dict:
             'icon_hidden': db_entry[0].ICON_HIDDEN,
             'icon_found': db_entry[0].ICON_FOUND,
             'permissions': python_dict(db_entry[0].PERMISSIONS),
-            'certificate_analysis': python_dict(
-                db_entry[0].CERTIFICATE_ANALYSIS),
             'manifest_analysis': manifest_analysis, ##
             'network_security': python_dict(db_entry[0].NETWORK_SECURITY), ##
             'binary_analysis': python_list(db_entry[0].BINARY_ANALYSIS),
-            'file_analysis': python_list(db_entry[0].FILE_ANALYSIS),
-            'android_api': python_dict(db_entry[0].ANDROID_API),
             'code_analysis': code, ##
-            'niap_analysis': python_dict(db_entry[0].NIAP_ANALYSIS),
-            'urls': python_list(db_entry[0].URLS),
-            'domains': python_dict(db_entry[0].DOMAINS),
-            'emails': python_list(db_entry[0].EMAILS),
-            'strings': python_list(db_entry[0].STRINGS),
             'firebase_urls': python_list(db_entry[0].FIREBASE_URLS), ##
-            'files': python_list(db_entry[0].FILES),
-            'exported_count': python_dict(db_entry[0].EXPORTED_COUNT),
-            'apkid': python_dict(db_entry[0].APKID),
-            'quark': python_list(db_entry[0].QUARK),
-            'trackers': python_dict(db_entry[0].TRACKERS),
-            'playstore_details': python_dict(db_entry[0].PLAYSTORE_DETAILS),
             'secrets': python_list(db_entry[0].SECRETS), ##
         }
         return context
@@ -142,11 +127,7 @@ def save_or_update(update_type,
                    man_data_dic,
                    man_an_dic,
                    code_an_dic,
-                   cert_dic,
-                   bin_anal,
-                   apk_id,
-                   quark_report,
-                   trackers) -> None:
+                   bin_anal,) -> None:
     """Save/Update an APK/ZIP DB entry."""
     try:
         values = {
@@ -173,27 +154,15 @@ def save_or_update(update_type,
             'VERSION_CODE': man_data_dic['androver'],
             'ICON_HIDDEN': app_dic['icon_hidden'],
             'ICON_FOUND': app_dic['icon_found'],
-            'CERTIFICATE_ANALYSIS': cert_dic,
             'PERMISSIONS': man_an_dic['permissions'], ##
             'MANIFEST_ANALYSIS': man_an_dic['manifest_anal'], ##
-            'BINARY_ANALYSIS': bin_anal,
-            'FILE_ANALYSIS': app_dic['certz'],
-            'ANDROID_API': code_an_dic['api'],
-            'CODE_ANALYSIS': code_an_dic['findings'],
+            'BINARY_ANALYSIS': bin_anal, ##
+            'CODE_ANALYSIS': code_an_dic['findings'], ##
             'NIAP_ANALYSIS': code_an_dic['niap'],
-            'URLS': code_an_dic['urls'],
-            'DOMAINS': code_an_dic['domains'],
-            'EMAILS': code_an_dic['emails'],
             'STRINGS': app_dic['strings'],
-            'FIREBASE_URLS': code_an_dic['firebase'],
-            'FILES': app_dic['files'],
-            'EXPORTED_COUNT': man_an_dic['exported_cnt'],
-            'APKID': apk_id,
-            'QUARK': quark_report,
-            'TRACKERS': trackers,
-            'PLAYSTORE_DETAILS': app_dic['playstore'],
-            'NETWORK_SECURITY': man_an_dic['network_security'],
-            'SECRETS': app_dic['secrets'],
+            'FIREBASE_URLS': code_an_dic['firebase'], ##
+            'NETWORK_SECURITY': man_an_dic['network_security'], ##
+            'SECRETS': app_dic['secrets'], ##
         }
         if update_type == 'save':
             db_entry = StaticAnalyzerAndroid.objects.filter(
