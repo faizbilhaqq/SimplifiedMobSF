@@ -59,25 +59,25 @@ def get_context_from_db_entry(db_entry: QuerySet) -> dict:
             'permissions': python_dict(db_entry[0].PERMISSIONS),
             'certificate_analysis': python_dict(
                 db_entry[0].CERTIFICATE_ANALYSIS),
-            'manifest_analysis': manifest_analysis,
-            'network_security': python_dict(db_entry[0].NETWORK_SECURITY),
+            'manifest_analysis': manifest_analysis, ##
+            'network_security': python_dict(db_entry[0].NETWORK_SECURITY), ##
             'binary_analysis': python_list(db_entry[0].BINARY_ANALYSIS),
             'file_analysis': python_list(db_entry[0].FILE_ANALYSIS),
             'android_api': python_dict(db_entry[0].ANDROID_API),
-            'code_analysis': code,
+            'code_analysis': code, ##
             'niap_analysis': python_dict(db_entry[0].NIAP_ANALYSIS),
             'urls': python_list(db_entry[0].URLS),
             'domains': python_dict(db_entry[0].DOMAINS),
             'emails': python_list(db_entry[0].EMAILS),
             'strings': python_list(db_entry[0].STRINGS),
-            'firebase_urls': python_list(db_entry[0].FIREBASE_URLS),
+            'firebase_urls': python_list(db_entry[0].FIREBASE_URLS), ##
             'files': python_list(db_entry[0].FILES),
             'exported_count': python_dict(db_entry[0].EXPORTED_COUNT),
             'apkid': python_dict(db_entry[0].APKID),
             'quark': python_list(db_entry[0].QUARK),
             'trackers': python_dict(db_entry[0].TRACKERS),
             'playstore_details': python_dict(db_entry[0].PLAYSTORE_DETAILS),
-            'secrets': python_list(db_entry[0].SECRETS),
+            'secrets': python_list(db_entry[0].SECRETS), ##
         }
         return context
     except Exception:
@@ -88,11 +88,7 @@ def get_context_from_analysis(app_dic,
                               man_data_dic,
                               man_an_dic,
                               code_an_dic,
-                              cert_dic,
-                              bin_anal,
-                              apk_id,
-                              quark_report,
-                              trackers) -> dict:
+                              bin_anal) -> dict:
     """Get the context for APK/ZIP from analysis results."""
     try:
         package = man_data_dic['packagename']
@@ -128,27 +124,13 @@ def get_context_from_analysis(app_dic,
             'version_code': man_data_dic['androver'],
             'icon_hidden': app_dic['icon_hidden'],
             'icon_found': app_dic['icon_found'],
-            'certificate_analysis': cert_dic,
-            'permissions': man_an_dic['permissions'],
-            'manifest_analysis': manifest_analysis,
-            'network_security': man_an_dic['network_security'],
+            'permissions': man_an_dic['permissions'], ##
+            'manifest_analysis': manifest_analysis, ##
+            'network_security': man_an_dic['network_security'], ##
             'binary_analysis': bin_anal,
-            'file_analysis': app_dic['certz'],
-            'android_api': code_an_dic['api'],
-            'code_analysis': code,
-            'niap_analysis': code_an_dic['niap'],
-            'urls': code_an_dic['urls'],
-            'domains': code_an_dic['domains'],
-            'emails': code_an_dic['emails'],
-            'strings': app_dic['strings'],
-            'firebase_urls': code_an_dic['firebase'],
-            'files': app_dic['files'],
-            'exported_count': man_an_dic['exported_cnt'],
-            'apkid': apk_id,
-            'quark': quark_report,
-            'trackers': trackers,
-            'playstore_details': app_dic['playstore'],
-            'secrets': app_dic['secrets'],
+            'code_analysis': code, ##
+            'firebase_urls': code_an_dic['firebase'], ##
+            'secrets': app_dic['secrets'], ##
         }
         return context
     except Exception:
@@ -192,8 +174,8 @@ def save_or_update(update_type,
             'ICON_HIDDEN': app_dic['icon_hidden'],
             'ICON_FOUND': app_dic['icon_found'],
             'CERTIFICATE_ANALYSIS': cert_dic,
-            'PERMISSIONS': man_an_dic['permissions'],
-            'MANIFEST_ANALYSIS': man_an_dic['manifest_anal'],
+            'PERMISSIONS': man_an_dic['permissions'], ##
+            'MANIFEST_ANALYSIS': man_an_dic['manifest_anal'], ##
             'BINARY_ANALYSIS': bin_anal,
             'FILE_ANALYSIS': app_dic['certz'],
             'ANDROID_API': code_an_dic['api'],

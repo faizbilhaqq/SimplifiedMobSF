@@ -188,38 +188,58 @@ def static_analyzer(request, api=False):
                     man_data_dic = manifest_data(app_dic['parsed_xml'])
                     app_dic['playstore'] = get_app_details(
                         man_data_dic['packagename'])
+                    
+                    ###########################################
+                    # Manifest analysis
+
+                    logger.info(
+                        'Performing Manifest Analysis')
                     man_an_dic = manifest_analysis(
                         app_dic['parsed_xml'],
                         man_data_dic,
                         '',
                         app_dic['app_dir'],
                     )
+                    ###########################################
+
                     elf_dict = elf_analysis(app_dic['app_dir'])
-                    cert_dic = cert_info(
-                        app_dic['app_dir'],
-                        app_dic['app_file'],
-                        man_data_dic)
-                    apkid_results = apkid_analysis(app_dic[
-                        'app_dir'], app_dic['app_path'], app_dic['app_name'])
-                    tracker = Trackers.Trackers(
-                        app_dic['app_dir'], app_dic['tools_dir'])
-                    tracker_res = tracker.get_trackers()
+                    # cert_dic = cert_info(
+                    #     app_dic['app_dir'],
+                    #     app_dic['app_file'],
+                    #     man_data_dic)
+                    # apkid_results = apkid_analysis(app_dic[
+                    #     'app_dir'], app_dic['app_path'], app_dic['app_name'])
+                    # tracker = Trackers.Trackers(
+                    #     app_dic['app_dir'], app_dic['tools_dir'])
+                    # tracker_res = tracker.get_trackers()
 
                     apk_2_java(app_dic['app_path'], app_dic['app_dir'],
                                app_dic['tools_dir'])
 
                     dex_2_smali(app_dic['app_dir'], app_dic['tools_dir'])
 
+                    ###########################################
+                    # Code analysis
+
+                    logger.info(
+                        'Performing Code Analysis')
+                    
                     code_an_dic = code_analysis(
                         app_dic['app_dir'],
                         'apk',
                         app_dic['manifest_file'])
+                    ###########################################
 
-                    quark_results = quark_analysis(
-                        app_dic['app_dir'],
-                        app_dic['app_path'])
+                    # quark_results = quark_analysis(
+                    #     app_dic['app_dir'],
+                    #     app_dic['app_path'])
+
+                    ###########################################
+                    # Hardcoded secrets
 
                     # Get the strings from android resource and shared objects
+                    logger.info(
+                        'Retrieving Hardcoded Secret')
                     string_res = strings_from_apk(
                         app_dic['app_file'],
                         app_dic['app_dir'],
@@ -234,73 +254,81 @@ def static_analyzer(request, api=False):
                     else:
                         app_dic['strings'] = []
                         app_dic['secrets'] = []
+
+                    ###########################################
+                    
                     # Firebase DB Check
+                    logger.info(
+                        'Performing Firebase DB Check')
                     code_an_dic['firebase'] = firebase_analysis(
                         list(set(code_an_dic['urls_list'])))
+                    ###########################################
+
                     # Domain Extraction and Malware Check
-                    logger.info(
-                        'Performing Malware Check on extracted Domains')
-                    code_an_dic['domains'] = MalwareDomainCheck().scan(
-                        list(set(code_an_dic['urls_list'])))
+                    # logger.info(
+                    #     'Performing Malware Check on extracted Domains')
+                    # code_an_dic['domains'] = MalwareDomainCheck().scan(
+                    #     list(set(code_an_dic['urls_list'])))
                     app_dic['zipped'] = 'apk'
 
-                    logger.info('Connecting to Database')
-                    try:
-                        # SAVE TO DB
-                        if rescan:
-                            logger.info('Updating Database...')
-                            save_or_update(
-                                'update',
-                                app_dic,
-                                man_data_dic,
-                                man_an_dic,
-                                code_an_dic,
-                                cert_dic,
-                                elf_dict['elf_analysis'],
-                                apkid_results,
-                                quark_results,
-                                tracker_res,
-                            )
-                            update_scan_timestamp(app_dic['md5'])
-                        else:
-                            logger.info('Saving to Database')
-                            save_or_update(
-                                'save',
-                                app_dic,
-                                man_data_dic,
-                                man_an_dic,
-                                code_an_dic,
-                                cert_dic,
-                                elf_dict['elf_analysis'],
-                                apkid_results,
-                                quark_results,
-                                tracker_res,
-                            )
-                    except Exception:
-                        logger.exception('Saving to Database Failed')
+                    # logger.info('Connecting to Database')
+                    # try:
+                    #     # SAVE TO DB
+                    #     if rescan:
+                    #         logger.info('Updating Database...')
+                    #         save_or_update(
+                    #             'update',
+                    #             app_dic,
+                    #             man_data_dic,
+                    #             man_an_dic,
+                    #             code_an_dic,
+                    #             cert_dic,
+                    #             elf_dict['elf_analysis'],
+                    #             apkid_results,
+                    #             quark_results,
+                    #             tracker_res,
+                    #         )
+                    #         update_scan_timestamp(app_dic['md5'])
+                    #     else:
+                    #         logger.info('Saving to Database')
+                    #         save_or_update(
+                    #             'save',
+                    #             app_dic,
+                    #             man_data_dic,
+                    #             man_an_dic,
+                    #             code_an_dic,
+                    #             cert_dic,
+                    #             elf_dict['elf_analysis'],
+                    #             apkid_results,
+                    #             quark_results,
+                    #             tracker_res,
+                    #         )
+                    # except Exception:
+                    #     logger.exception('Saving to Database Failed')
                     context = get_context_from_analysis(
                         app_dic,
                         man_data_dic,
                         man_an_dic,
                         code_an_dic,
-                        cert_dic,
                         elf_dict['elf_analysis'],
-                        apkid_results,
-                        quark_results,
-                        tracker_res,
                     )
-                context['appsec'] = get_android_dashboard(context, True)
+                # context['appsec'] = get_android_dashboard(context, True)
+                # context['average_cvss'] = get_avg_cvss(
+                #     context['code_analysis'])
+                # context['dynamic_analysis_done'] = is_file_exists(
+                #     os.path.join(app_dic['app_dir'], 'logcat.txt'))
+
+                # context['appsec'] = get_android_dashboard(context, True)
                 context['average_cvss'] = get_avg_cvss(
                     context['code_analysis'])
-                context['dynamic_analysis_done'] = is_file_exists(
-                    os.path.join(app_dic['app_dir'], 'logcat.txt'))
+                context['dynamic_analysis_done'] = False
 
                 context['virus_total'] = None
-                if settings.VT_ENABLED:
-                    vt = VirusTotal.VirusTotal()
-                    context['virus_total'] = vt.get_result(
-                        app_dic['app_path'],
-                        app_dic['md5'])
+                # if settings.VT_ENABLED:
+                #     vt = VirusTotal.VirusTotal()
+                #     context['virus_total'] = vt.get_result(
+                #         app_dic['app_path'],
+                #         app_dic['md5'])
                 template = 'static_analysis/android_binary_analysis.html'
                 if api:
                     return context
