@@ -1,8 +1,6 @@
 {% extends "base/base_layout.html" %}
    {% load static %}
-     {% block sidebar_option %}
-      sidebar-mini
-     {% endblock %}
+
     {% block extra_css %}
     <link href="{% static "adminlte/plugins/sweetalert2/sweetalert2.min.css" %}" rel="stylesheet">
     <!-- DataTables -->
@@ -47,13 +45,9 @@
   </div>
     <!-- Main Sidebar Container -->
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" style="background-color: #0c744e;" >
         <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="info">
-          <a href="#" class="d-block">Static Analyzer</a>
-        </div>
-      </div>
+    
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -61,7 +55,18 @@
           
         
            
-         
+          <li class="nav-item">
+            <a href="#secrets" class="nav-link">
+              <i class="fas fa-key nav-icon"></i>
+              <p>Hardcoded Secrets</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#code_analysis" class="nav-link">
+              <i class="fa fa-code nav-icon"></i>
+              <p>Code Analysis</p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="#permissions" class="nav-link">
               <i class="nav-icon fas fa-list"></i>
@@ -70,6 +75,37 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="#manifest" class="nav-link">
+              <i class="fas fa-search nav-icon"></i>
+              <p>Manifest Analysis</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#network_security" class="nav-link">
+              <i class="nav-icon fas fa-lock"></i>
+              <p>
+                Network Security
+              </p>
+            </a>
+          </li>
+         
+        
+          <li class="nav-item">
+            <a href="#firebase" class="nav-link">
+              <i class="fas fa-database nav-icon"></i>
+              <p>Firebase DB</p>
+            </a>
+          </li>
+        
+          <!-- <li class="nav-item">
+            <a href="../pdf/?md5={{ md5 }}" class="nav-link">
+            <i class="nav-icon fas fa-file-pdf"></i>
+            <p>
+              PDF Report
+            </p>
+           </a>
+          </li> -->
           <!-- <li class="nav-item">
             <a href="#android_api" class="nav-link">
               <i class="nav-icon fab fa-android"></i>
@@ -87,7 +123,7 @@
             </a>
           </li> -->
           
-          <li class="nav-item has-treeview">
+          <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-shield-alt"></i>
               <p>
@@ -103,7 +139,7 @@
                     Network Security
                   </p>
                 </a>
-              </li>
+              </li> -->
               <!-- <li class="nav-item">
                 <a href="#certificate_analysis" class="nav-link">
                   <i class="nav-icon fa fa-id-card"></i>
@@ -112,7 +148,7 @@
                   </p>
                 </a>
               </li> -->
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="#manifest" class="nav-link">
                   <i class="fas fa-search nav-icon"></i>
                   <p>Manifest Analysis</p>
@@ -123,7 +159,7 @@
                   <i class="fa fa-code nav-icon"></i>
                   <p>Code Analysis</p>
                 </a>
-              </li>
+              </li> -->
               <!-- <li class="nav-item">
                 <a href="#binary_analysis" class="nav-link">
                   <i class="nav-icon fas fa-flag"></i>
@@ -187,7 +223,7 @@
               </li>
             </ul>
           </li> -->
-           <li class="nav-item has-treeview">
+           <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-plus"></i>
               <p>
@@ -195,19 +231,19 @@
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview"> -->
               <!-- <li class="nav-item">
                 <a href="#urls" class="nav-link">
                   <i class="fas fa-globe nav-icon"></i>
                   <p>URLs</p>
                 </a>
               </li> -->
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="#firebase" class="nav-link">
                   <i class="fas fa-database nav-icon"></i>
                   <p>Firebase DB</p>
                 </a>
-              </li>
+              </li> -->
               <!-- <li class="nav-item">
                 <a href="#emails" class="nav-link">
                   <i class="fas fa-envelope nav-icon"></i>
@@ -226,13 +262,13 @@
                   <p>Strings</p>
                 </a>
               </li> -->
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="#secrets" class="nav-link">
                   <i class="fas fa-key nav-icon"></i>
                   <p>Hardcoded Secrets</p>
                 </a>
               </li>
-            </ul>
+            </ul> -->
           <!-- </li>
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -281,14 +317,14 @@
               </li>
             </ul>
           </li> -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a href="../pdf/?md5={{ md5 }}" class="nav-link">
               <i class="nav-icon fas fa-file-pdf"></i>
               <p>
                 PDF Report
               </p>
              </a>
-            </li>
+            </li> -->
             <!-- <li class="nav-item">
               <a href="javascript:window.print()" class="nav-link">
               <i class="nav-icon fa fa-print"></i>
@@ -340,6 +376,179 @@
 
  <!-- Main content -->
 <!--  -->
+<a id="secrets" class="anchor"></a>
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+             <p>
+             <strong><i class="fas fa-key"></i> POSSIBLE HARDCODED SECRETS</strong>
+             </p>
+               <div class="list-group">
+                  <p>  
+                    {% for val in secrets %}
+                     {{ val }}<br/>
+                    {% endfor %}                  
+                  </p>
+              </div>
+            </div>
+          </div>
+        </div><!-- /.card -->
+        </div>
+        <!-- end row -->
+        </div>
+
+        <!-- <button class="btn btn-default " onclick="myFunction()" id="myBtn" ><b>Read more</b></button> -->
+</section>
+
+
+
+<div id="more">
+<a id="code_analysis" class="anchor"></a>
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <p>
+             <strong><i class="fas fa-code"></i> CODE ANALYSIS</strong>
+             </p>
+              <div class="table-responsive">
+                {% if code_analysis and 'summary' in code_analysis and code_analysis.summary|length > 0  %}
+            <div class="row">
+              <div class="col-sm-2 col-6">
+              <div class="description-block border-right">
+              <span class="text-danger">HIGH</span>
+              <h5 class="description-header">{{ code_analysis.summary.high }}</h5>
+              </div>
+              </div>
+              
+              <div class="col-sm-2 col-6">
+              <div class="description-block border-right">
+              <span class="text-warning"></i> WARNING</span>
+              <h5 class="description-header">{{ code_analysis.summary.warning }}</h5>
+              </div>
+              
+              </div>
+              
+              <div class="col-sm-2 col-6">
+              <div class="description-block border-right">
+              <span class="text-info">INFO</span>
+              <h5 class="description-header">{{ code_analysis.summary.info }}</h5>
+              </div>
+              
+              </div>
+              
+              <div class="col-sm-2 col-6">
+                <div class="description-block border-right">
+                <span class="text-success">SECURE</span>
+                <h5 class="description-header">{{ code_analysis.summary.secure }}</h5>
+                </div>
+                
+                </div>
+
+              <div class="col-sm-2 col-6">
+                <div class="description-block">
+                <span class="text-disabled">SUPPRESSED</span>
+                <h5 class="description-header">{{ code_analysis.summary.suppressed }}</h5>
+                </div>
+                
+                </div>
+                
+              
+              </div>
+              {% endif %}
+                <table id="table_code" class="table table-bordered table-hover table-striped">
+                    <thead>
+                    <tr>
+                      <th>NO</th>
+                      <th>ISSUE</th>
+                      <th>SEVERITY</th>
+                      <th>STANDARDS</th>
+                      <th>FILES</th>
+                      <th>OPTIONS</th>
+                  </tr>
+                    </thead>
+                      <tbody>
+               {% if code_analysis and 'findings' in code_analysis %}
+               {% for rule, details in code_analysis.findings.items %}
+                  <tr>
+                  <td>{{ forloop.counter }}</td>
+                  <td>
+                    {% if details.metadata|key:"ref" %}
+                      <a href="{{details.metadata.ref}}" target="_blank" rel="noopener"> {{ details.metadata.description }}</a>
+                    {% else %}
+                      {{ details.metadata.description }}
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if details.metadata.severity == "high" %}
+                      <span class="badge bg-danger">high</span>
+                      {% elif details.metadata.severity == "good" %}
+                      <span class="badge bg-success">secure</span>
+                      {% elif details.metadata.severity == "warning" %}
+                      <span class="badge bg-warning">warning</span>
+                      {% elif details.metadata.severity == "info" %}
+                      <span class="badge bg-info">info</span>
+                      {% endif %}
+                  </td>
+                  <td>
+                      {% if average_cvss %}
+                        <strong>CVSS V2:</strong>
+                        {{ details.metadata.cvss }}
+                        {% if details.metadata.cvss > 6 %}
+                          (high)
+                        {% elif details.metadata.cvss == 0 %}
+                          (info)
+                        {% elif details.metadata.cvss >= 4 %}
+                          (medium)
+                        {% elif details.metadata.cvss < 4 %}
+                          (low)
+                        {% endif %}
+                        </br>
+                      {% endif %}
+                      {% if details.metadata.cwe %} <strong>CWE: </strong>{{ details.metadata.cwe }}{% endif %}
+                      {% if details.metadata|key:"owasp-mobile" %}</br> <strong>OWASP Top 10: </strong>{{ details.metadata|key:"owasp-mobile" }}{% endif %}
+                      {% if details.metadata.masvs %}</br> <strong>OWASP MASVS: </strong>{{ details.metadata.masvs }}{% endif %}
+                  </td>
+                  <td>
+                  {% for file_path, lines in details.files.items %}
+                   <a href="{% url "view_source" %}?file={{ file_path }}&amp;md5={{ md5 }}&amp;type={{app_type}}&amp;lines={{ lines}}"> {{ file_path }}</a>
+                  <br/>
+                  {% endfor %}
+                  </td>
+                  <td>
+
+                    <div class="dropdown show">
+                      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-eye-slash"></i>
+                      </a>
+                    
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a style="cursor:pointer;" class="dropdown-item" onclick="suppress('{{rule | escapejs }}', false, $(this.closest('tr')))">Suppress the rule <b>{{ rule }}</b> in <b>{{package_name}}</b></a>
+                        <a style="cursor:pointer;" class="dropdown-item" onclick="suppress('{{rule | escapejs }}', true, $(this.closest('tr')))">Suppress the rule <b>{{ rule }}</b> in <b>{{package_name}}</b> only from these files</a>
+                      </div>
+                    </div>
+
+                  </td>
+                </tr>    
+              {% endfor %}
+              {% endif %}
+              </tbody>
+            </table>
+            
+
+            </div>
+          </div>
+        </div><!-- /.card -->
+        </div>
+        <!-- end row -->
+        </div>
+    </div>
+</section>
  <!-- ===========================end cert ================================== -->
 <a id="permissions" class="anchor"></a>
 <section class="content">
@@ -395,7 +604,113 @@
     </div>
 </section>
  <!-- ===========================end permission ================================== -->
-   
+ <a id="manifest" class="anchor"></a>
+ <section class="content">
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <p>
+             <strong><i class="fas fa-search"></i> MANIFEST ANALYSIS</strong>
+             </p>
+              <div class="table-responsive">
+                {% if manifest_analysis and 'manifest_summary' in manifest_analysis and manifest_analysis.manifest_summary|length > 0%}
+                  <div class="row">
+                    <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                    <span class="text-danger">HIGH</span>
+                    <h5 class="description-header">{{ manifest_analysis.manifest_summary.high }}</h5>
+                    </div>
+                    </div>
+                    
+                    <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                    <span class="text-warning"></i> WARNING</span>
+                    <h5 class="description-header">{{ manifest_analysis.manifest_summary.warning }}</h5>
+                    </div>
+                    
+                    </div>
+                    
+                    <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                    <span class="text-info">INFO</span>
+                    <h5 class="description-header">{{ manifest_analysis.manifest_summary.info }}</h5>
+                    </div>
+                    
+                    </div>
+
+                    <div class="col-sm-3 col-6">
+                      <div class="description-block">
+                      <span class="text-disabled">SUPPRESSED</span>
+                      <h5 class="description-header">{{ manifest_analysis.manifest_summary.suppressed }}</h5>
+                      </div>
+                      
+                      </div>
+                      
+                    
+                    </div>
+                    {% endif %}
+                <table id="table_manifest" class="table table-bordered table-hover table-striped">
+                      <thead>
+                      <tr>
+                          <th>NO</th>
+                          <th>ISSUE</th>
+                          <th>SEVERITY</th>
+                          <th>DESCRIPTION</th>
+                          <th>OPTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% if manifest_analysis and 'manifest_findings' in manifest_analysis %}
+                    {% for item in manifest_analysis.manifest_findings %}
+                      <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>
+                        {{item|key:"title" | safe}}
+                        </td>
+                        <td>
+
+                          {% if item|key:"severity" == "high" %}
+                            <span class="badge bg-danger">high</span>
+                          {% elif item|key:"severity" == "info" %}
+                            <span class="badge bg-info">info</span>
+                          {% elif item|key:"severity" == "warning" %}
+                            <span class="badge bg-warning">warning</span>
+                          {% endif %}
+                         
+                        </td>
+                        <td>
+                        {{item|key:"description"}}
+                        </td>
+                        <td>
+                          <div class="dropdown show">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i class="fa fa-eye-slash"></i>
+                            </a>
+      
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                              <a style="cursor:pointer;" class="dropdown-item" onclick="suppress('{{ item|key:"title" | android_component}}{{item|key:'rule' | escapejs }}', false, $(this.closest('tr')), true)">Suppression the rule <b>{{ item|key:"title" | android_component}}{{ item|key:'rule' }}</b> in <b>{{package_name}}</b></a>
+                            </div>
+                          </div>
+                        </td>
+                       </tr>
+                     {% endfor %}
+                     {% endif %}
+                    </tbody>
+                  </table>
+                  
+
+                  </div>
+          </div>
+        </div><!-- /.card -->
+        </div>
+        <!-- end row -->
+        </div>
+    </div>
+</section>
+
+
  <!-- ===========================end browsable activities ================================== -->
  <a id="network_security" class="anchor"></a>
  <section class="content">
@@ -573,333 +888,74 @@
     </div>
 </section>
  <!-- ===========================end certificate analysis ================================== -->
- <a id="manifest" class="anchor"></a>
+ <a id="firebase" class="anchor"></a>
  <section class="content">
-  <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-        <div class="card">
-          <div class="card-body">
-            <p>
-             <strong><i class="fas fa-search"></i> MANIFEST ANALYSIS</strong>
-             </p>
-              <div class="table-responsive">
-                {% if manifest_analysis and 'manifest_summary' in manifest_analysis and manifest_analysis.manifest_summary|length > 0%}
-                  <div class="row">
-                    <div class="col-sm-3 col-6">
-                    <div class="description-block border-right">
-                    <span class="text-danger">HIGH</span>
-                    <h5 class="description-header">{{ manifest_analysis.manifest_summary.high }}</h5>
-                    </div>
-                    </div>
-                    
-                    <div class="col-sm-3 col-6">
-                    <div class="description-block border-right">
-                    <span class="text-warning"></i> WARNING</span>
-                    <h5 class="description-header">{{ manifest_analysis.manifest_summary.warning }}</h5>
-                    </div>
-                    
-                    </div>
-                    
-                    <div class="col-sm-3 col-6">
-                    <div class="description-block border-right">
-                    <span class="text-info">INFO</span>
-                    <h5 class="description-header">{{ manifest_analysis.manifest_summary.info }}</h5>
-                    </div>
-                    
-                    </div>
-
-                    <div class="col-sm-3 col-6">
-                      <div class="description-block">
-                      <span class="text-disabled">SUPPRESSED</span>
-                      <h5 class="description-header">{{ manifest_analysis.manifest_summary.suppressed }}</h5>
-                      </div>
-                      
-                      </div>
-                      
-                    
-                    </div>
-                    {% endif %}
-                <table id="table_manifest" class="table table-bordered table-hover table-striped">
-                      <thead>
-                      <tr>
-                          <th>NO</th>
-                          <th>ISSUE</th>
-                          <th>SEVERITY</th>
-                          <th>DESCRIPTION</th>
-                          <th>OPTIONS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% if manifest_analysis and 'manifest_findings' in manifest_analysis %}
-                    {% for item in manifest_analysis.manifest_findings %}
-                      <tr>
-                        <td>{{ forloop.counter }}</td>
+   <div class="container-fluid">
+     <div class="row">
+         <div class="col-lg-12">
+         <div class="card">
+           <div class="card-body">
+             <p>
+              <strong><i class="fas fa-database"></i> FIREBASE DATABASE</strong>
+              </p>
+               <div class="table-responsive">
+                {% if firebase_urls %} 
+              <table id="table_firebase" class="table table-bordered table-hover table-striped">
+                   <thead>
+                   <tr>
+                      <th>FIREBASE URL</th>
+                      <th>DETAILS</th>
+                   </tr>
+                  </thead>
+                
+                  <tbody>
+                   {% for item in firebase_urls %}
+                     <tr>
                         <td>
-                        {{item|key:"title" | safe}}
-                        </td>
+                        {{ item.url }}
+                         </td>
                         <td>
-
-                          {% if item|key:"severity" == "high" %}
-                            <span class="badge bg-danger">high</span>
-                          {% elif item|key:"severity" == "info" %}
-                            <span class="badge bg-info">info</span>
-                          {% elif item|key:"severity" == "warning" %}
-                            <span class="badge bg-warning">warning</span>
+                          {% if item.open %}
+                           <span class="badge bg-danger">high</span><br/>Firebase Database is exposed publicly.
+                         {% else %}
+                          <span class="badge bg-primary">info</span><br/>App talks to a Firebase database.
                           {% endif %}
-                         
                         </td>
-                        <td>
-                        {{item|key:"description"}}
-                        </td>
-                        <td>
-                          <div class="dropdown show">
-                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <i class="fa fa-eye-slash"></i>
-                            </a>
-      
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                              <a style="cursor:pointer;" class="dropdown-item" onclick="suppress('{{ item|key:"title" | android_component}}{{item|key:'rule' | escapejs }}', false, $(this.closest('tr')), true)">Suppression the rule <b>{{ item|key:"title" | android_component}}{{ item|key:'rule' }}</b> in <b>{{package_name}}</b></a>
-                            </div>
-                          </div>
-                        </td>
-                       </tr>
-                     {% endfor %}
-                     {% endif %}
-                    </tbody>
-                  </table>
-                  
+                     </tr>
+                   {% endfor %} 
+                </tbody>
+             </table>
+              {% endif %}
+             </div>
+           </div>
+         </div><!-- /.card -->
+         </div>
+         <!-- end row -->
+         </div>
+     </div>
+ </section>
 
-                  </div>
-          </div>
-        </div><!-- /.card -->
-        </div>
-        <!-- end row -->
-        </div>
-    </div>
-</section>
+ 
+</div>
+
+<button class="btn btn-default " onclick="myFunction()" id="myBtn" >Read more</button>
+
+
+
+
+ 
  <!-- ===========================end manifest analysis ================================== -->
-  <a id="code_analysis" class="anchor"></a>
-<section class="content">
-  <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-        <div class="card">
-          <div class="card-body">
-            <p>
-             <strong><i class="fas fa-code"></i> CODE ANALYSIS</strong>
-             </p>
-              <div class="table-responsive">
-                {% if code_analysis and 'summary' in code_analysis and code_analysis.summary|length > 0  %}
-            <div class="row">
-              <div class="col-sm-2 col-6">
-              <div class="description-block border-right">
-              <span class="text-danger">HIGH</span>
-              <h5 class="description-header">{{ code_analysis.summary.high }}</h5>
-              </div>
-              </div>
-              
-              <div class="col-sm-2 col-6">
-              <div class="description-block border-right">
-              <span class="text-warning"></i> WARNING</span>
-              <h5 class="description-header">{{ code_analysis.summary.warning }}</h5>
-              </div>
-              
-              </div>
-              
-              <div class="col-sm-2 col-6">
-              <div class="description-block border-right">
-              <span class="text-info">INFO</span>
-              <h5 class="description-header">{{ code_analysis.summary.info }}</h5>
-              </div>
-              
-              </div>
-              
-              <div class="col-sm-2 col-6">
-                <div class="description-block border-right">
-                <span class="text-success">SECURE</span>
-                <h5 class="description-header">{{ code_analysis.summary.secure }}</h5>
-                </div>
-                
-                </div>
 
-              <div class="col-sm-2 col-6">
-                <div class="description-block">
-                <span class="text-disabled">SUPPRESSED</span>
-                <h5 class="description-header">{{ code_analysis.summary.suppressed }}</h5>
-                </div>
-                
-                </div>
-                
-              
-              </div>
-              {% endif %}
-                <table id="table_code" class="table table-bordered table-hover table-striped">
-                    <thead>
-                    <tr>
-                      <th>NO</th>
-                      <th>ISSUE</th>
-                      <th>SEVERITY</th>
-                      <th>STANDARDS</th>
-                      <th>FILES</th>
-                      <th>OPTIONS</th>
-                  </tr>
-                    </thead>
-                      <tbody>
-               {% if code_analysis and 'findings' in code_analysis %}
-               {% for rule, details in code_analysis.findings.items %}
-                  <tr>
-                  <td>{{ forloop.counter }}</td>
-                  <td>
-                    {% if details.metadata|key:"ref" %}
-                      <a href="{{details.metadata.ref}}" target="_blank" rel="noopener"> {{ details.metadata.description }}</a>
-                    {% else %}
-                      {{ details.metadata.description }}
-                    {% endif %}
-                  </td>
-                  <td>
-                    {% if details.metadata.severity == "high" %}
-                      <span class="badge bg-danger">high</span>
-                      {% elif details.metadata.severity == "good" %}
-                      <span class="badge bg-success">secure</span>
-                      {% elif details.metadata.severity == "warning" %}
-                      <span class="badge bg-warning">warning</span>
-                      {% elif details.metadata.severity == "info" %}
-                      <span class="badge bg-info">info</span>
-                      {% endif %}
-                  </td>
-                  <td>
-                      {% if average_cvss %}
-                        <strong>CVSS V2:</strong>
-                        {{ details.metadata.cvss }}
-                        {% if details.metadata.cvss > 6 %}
-                          (high)
-                        {% elif details.metadata.cvss == 0 %}
-                          (info)
-                        {% elif details.metadata.cvss >= 4 %}
-                          (medium)
-                        {% elif details.metadata.cvss < 4 %}
-                          (low)
-                        {% endif %}
-                        </br>
-                      {% endif %}
-                      {% if details.metadata.cwe %} <strong>CWE: </strong>{{ details.metadata.cwe }}{% endif %}
-                      {% if details.metadata|key:"owasp-mobile" %}</br> <strong>OWASP Top 10: </strong>{{ details.metadata|key:"owasp-mobile" }}{% endif %}
-                      {% if details.metadata.masvs %}</br> <strong>OWASP MASVS: </strong>{{ details.metadata.masvs }}{% endif %}
-                  </td>
-                  <td>
-                  {% for file_path, lines in details.files.items %}
-                   <a href="{% url "view_source" %}?file={{ file_path }}&amp;md5={{ md5 }}&amp;type={{app_type}}&amp;lines={{ lines}}"> {{ file_path }}</a>
-                  <br/>
-                  {% endfor %}
-                  </td>
-                  <td>
-
-                    <div class="dropdown show">
-                      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-eye-slash"></i>
-                      </a>
-                    
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a style="cursor:pointer;" class="dropdown-item" onclick="suppress('{{rule | escapejs }}', false, $(this.closest('tr')))">Suppress the rule <b>{{ rule }}</b> in <b>{{package_name}}</b></a>
-                        <a style="cursor:pointer;" class="dropdown-item" onclick="suppress('{{rule | escapejs }}', true, $(this.closest('tr')))">Suppress the rule <b>{{ rule }}</b> in <b>{{package_name}}</b> only from these files</a>
-                      </div>
-                    </div>
-
-                  </td>
-                </tr>    
-              {% endfor %}
-              {% endif %}
-              </tbody>
-            </table>
-            
-
-            </div>
-          </div>
-        </div><!-- /.card -->
-        </div>
-        <!-- end row -->
-        </div>
-    </div>
-</section>
  <!-- ===========================end code analysis ================================== -->
  
  <!-- ===========================end urls ================================== -->
- <a id="firebase" class="anchor"></a>
-<section class="content">
-  <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-        <div class="card">
-          <div class="card-body">
-            <p>
-             <strong><i class="fas fa-database"></i> FIREBASE DATABASE</strong>
-             </p>
-              <div class="table-responsive">
-               {% if firebase_urls %} 
-             <table id="table_firebase" class="table table-bordered table-hover table-striped">
-                  <thead>
-                  <tr>
-                     <th>FIREBASE URL</th>
-                     <th>DETAILS</th>
-                  </tr>
-                 </thead>
-               
-                 <tbody>
-                  {% for item in firebase_urls %}
-                    <tr>
-                       <td>
-                       {{ item.url }}
-                        </td>
-                       <td>
-                         {% if item.open %}
-                          <span class="badge bg-danger">high</span><br/>Firebase Database is exposed publicly.
-                        {% else %}
-                         <span class="badge bg-primary">info</span><br/>App talks to a Firebase database.
-                         {% endif %}
-                       </td>
-                    </tr>
-                  {% endfor %} 
-               </tbody>
-            </table>
-             {% endif %}
-            </div>
-          </div>
-        </div><!-- /.card -->
-        </div>
-        <!-- end row -->
-        </div>
-    </div>
-</section>
+
  <!-- ===========================end firebase db ================================== -->
  
  <!-- ===========================end trackers ================================== -->
 
  <!-- ===========================end strings ================================== -->
- <a id="secrets" class="anchor"></a>
-<section class="content">
-  <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-        <div class="card">
-          <div class="card-body">
-             <p>
-             <strong><i class="fas fa-key"></i> POSSIBLE HARDCODED SECRETS</strong>
-             </p>
-               <div class="list-group">
-                  <p>  
-                    {% for val in secrets %}
-                     {{ val }}<br/>
-                    {% endfor %}                  
-                  </p>
-              </div>
-            </div>
-          </div>
-        </div><!-- /.card -->
-        </div>
-        <!-- end row -->
-        </div>
-</section>
+
  <!-- ===========================end secrets ================================== -->
 
  <!-- ===========================end files ================================== -->
@@ -1056,6 +1112,24 @@ imageSeries.data = [
   {% endfor %}
 {% endif %}
 ];
+
+function myFunction() {
+  
+  var moreText = document.getElementById("more");
+  var btnText = document.getElementById("myBtn");
+
+  if (btnText.innerHTML === "Read less") {
+    
+    btnText.innerHTML = "Read more"; 
+    moreText.style.display = "none";
+  } else {
+    
+    btnText.innerHTML = "Read less"; 
+    moreText.style.display = "inline";
+  }
+}
+
+
 </script>
 
 {% endblock %}

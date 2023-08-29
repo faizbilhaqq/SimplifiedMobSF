@@ -15,13 +15,16 @@
       <link rel="stylesheet" href="{% static "landing/css/home.css" %}">
       <!-- Google Font: Source Sans Pro -->
       <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
    </head>
    <body>
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-md " style="background-color: #167A8B;" >
         <div class="container-fluid">
+            
             <a  class="navbar-brand abs">
-                <img src="{% static "img/mobsf_logo.png" %}" width="20%" height="20%"/>
+                <img src="{% static "img/telkomlogo.png" %}" width="55px" height="55px"/>
+                
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -71,20 +74,29 @@
                   </br>
                   <form id="upload_form" enctype="multipart/form-data" method="post">
                      {% csrf_token %}
-                     <div class="fileUpload btn btn-default btn-lg" id="but">
-                        <input type="file" name="file" id="uploadFile" placeholder="Choose File" multiple>
-                        <span class="fas fa-cloud-upload-alt"></span>
-                        Upload &amp; Analyze
-                     </div>
+                     <i style="margin-bottom: 15px;" class="fa-solid fa-cloud-arrow-up fa-6x"></i>
+                     
                      <br />
-                     <small><i>Drag &amp; Drop anywhere!</i></small>
+                     <i style="font-size: 23px;" >Drag &amp; Drop anywhere!</i>
+                     
+                     <br />
+                     <i style="font-size: 23px;" >OR</i>
+                     <br />
+                     
+
+                     <div style="margin-top: 25px;" class="fileUpload btn btn-default btn-lg" id="but">
+                        <input type="file" name="file" id="uploadFile" placeholder="Choose File" multiple>
+                        <i style="margin-right: 5px;" class="fa-regular fa-folder-open"></i>
+                          Browse Files
+                     </div>
+                  
                      <h5 id="status"></h5>
                      <progress id="progressBar" value="0" max="100" style="width:300px;visibility:hidden;" ></progress>
                   </form>
                </div>
                <div class="mastfoot">
                 
-                  <input type="download" id="package" class="form-control" placeholder="Download & Scan by package name"/>
+                  <!-- <input type="download" id="package" class="form-control" placeholder="Download & Scan by package name"/>
 
 
                   <div class="inner">
@@ -92,7 +104,7 @@
                          href="https://mobsf.github.io/docs/#/">DOCS</a>  | <a href="{% url 'about' %}">ABOUT</a></h6>
                      </br>
                      <p>&copy; {% now "Y" %}  Mobile Security Framework - MobSF {{ version }}</p>
-                  </div>
+                  </div> -->
                </div>
             </div>
          </div>
