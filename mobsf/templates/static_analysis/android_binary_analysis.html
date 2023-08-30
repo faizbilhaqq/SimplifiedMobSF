@@ -27,7 +27,12 @@
             white-space: -o-pre-wrap;    /* Opera 7 */
             word-wrap: break-word;       /* Internet Explorer 5.5+ */
             }
+            .black-link {
+              color: #0000FF;
+            }
     </style>
+    
+    <!-- auto hide sidebar -->
     <script>
       // Preloading
       function dynamic_loader(){
@@ -479,7 +484,7 @@
                   <td>{{ forloop.counter }}</td>
                   <td>
                     {% if details.metadata|key:"ref" %}
-                      <a href="{{details.metadata.ref}}" target="_blank" rel="noopener"> {{ details.metadata.description }}</a>
+                      <a class="black-link" href="{{details.metadata.ref}}" target="_blank" rel="noopener"> {{ details.metadata.description }}</a>
                     {% else %}
                       {{ details.metadata.description }}
                     {% endif %}
@@ -516,7 +521,7 @@
                   </td>
                   <td>
                   {% for file_path, lines in details.files.items %}
-                   <a href="{% url "view_source" %}?file={{ file_path }}&amp;md5={{ md5 }}&amp;type={{app_type}}&amp;lines={{ lines}}"> {{ file_path }}</a>
+                   <a class="black-link" href="{% url "view_source" %}?file={{ file_path }}&amp;md5={{ md5 }}&amp;type={{app_type}}&amp;lines={{ lines}}"> {{ file_path }}</a>
                   <br/>
                   {% endfor %}
                   </td>
@@ -937,9 +942,9 @@
 
  
 </div>
-
-<button class="btn btn-default " onclick="myFunction()" id="myBtn" >Read more</button>
-
+<div class="d-flex justify-content-center align-items-center vh-10">
+<button class="btn btn-primary " onclick="myFunction()" id="myBtn" >Advance Scan Result</button>
+</div>
 
 
 
@@ -1128,6 +1133,8 @@ function myFunction() {
     moreText.style.display = "inline";
   }
 }
+
+
 
 
 </script>
