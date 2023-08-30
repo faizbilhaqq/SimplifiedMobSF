@@ -26,6 +26,18 @@
 
   {% endblock %}
 </head>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Check if the element with ID "nbar" exists
+    var nbarElement = document.getElementById("nbar");
+    
+    // Trigger a click on the element if it exists
+    if (nbarElement) {
+      nbarElement.click();
+    }
+  });
+  </script>
+
 <body class="hold-transition {% block sidebar_option %} {% endblock %} layout-fixed layout-navbar-fixed">
 <div class="wrapper" >
 
